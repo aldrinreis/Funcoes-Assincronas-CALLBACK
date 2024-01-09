@@ -32,3 +32,28 @@ cadastrarUsuario((erro) => {
   }
   console.log("Usuário cadastrado com sucesso");
 });
+
+function baixarConteudo(nomeConteudo, callback) {
+  console.log(`Iniciando o download do conteúdo ${nomeConteudo}...`);
+  //Simula o Tempo de Download (em milissegundos)
+  setTimeout(function () {
+    console.log(`${nomeConteudo} foi baixado com sucesso.`);
+    callback(null, nomeConteudo); //indica que o download foi concluido com sucesso
+  }, 2000); // Simula 2 segundos de download
+}
+
+// VAMOS CRIAR UMA FUNÇÃO CALLBACK SIMPLES QUE SERÁ CHAMADA APÓS O DOWNLOAD.
+
+function callbackConcluirDownload(erro, nomeConteudo) {
+  if (erro) {
+    return console.log(`Erro ao baixar ${nomeConteudo}: ${erro.message}`);
+  } else {
+    console.log(`Download de ${nomeConteudo} concluído com sucesso.`);
+  }
+}
+
+// Agora vamos usar a função baixar conteúdo com callback.
+
+baixarConteudo("Documento.pdf", callbackConcluirDownload);
+baixarConteudo("Imagem.jpg", callbackConcluirDownload);
+baixarConteudo("Video.mp4", callbackConcluirDownload);
